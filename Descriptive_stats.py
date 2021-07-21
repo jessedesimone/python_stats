@@ -45,10 +45,11 @@ plt.ylabel("Observation frequency")     #use if kde=False
 
 
 # Descriptive statistics
+data = [10,291,87,838,190]
 np.mean(data)       #mean
 np.median(data)     #median
 stats.mode(data)    #mode
 np.std(data)        #SD
-stats.sem(data)     #SEM
+stats.sem(data)     #SEM¸
 np.var(data)        #variance
 max(data)-min(data)     #range

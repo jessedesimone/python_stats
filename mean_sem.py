@@ -41,7 +41,7 @@ df.to_csv(path_to_file + 'calculations.csv')
 
 
 # Option 2 - no DataFrame
-values = [81,81,45,221]
+values = [10,116,96,327,147]
 mean = round(np.mean(values), 3)
 sem = round(stats.sem(values), 3)
 print ('Mean: ', mean, '::     SEM', sem)
