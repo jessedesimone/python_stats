@@ -49,5 +49,6 @@ np.mean(data)       #mean
 np.median(data)     #median
 stats.mode(data)    #mode
 np.std(data)        #SD
+stats.sem(data)     #SEM
 np.var(data)        #variance
 max(data)-min(data)     #range
