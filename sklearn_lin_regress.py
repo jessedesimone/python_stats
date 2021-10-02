@@ -74,7 +74,7 @@ from sklearn.linear_model import LinearRegression
 from sklearn.metrics import r2_score
 
 # Import data
-inpath = '/Users/jessedesimone/DeSimone_Github/python_stats/Datasets/'
+inpath = '<path/to/file>'
 df = pd.read_csv(inpath + 'FuelConsumption.csv')
 
 # Examine data
