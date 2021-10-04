@@ -151,7 +151,6 @@ def get_metrics_score(model, X_train_df, X_test_df, y_train_pass, y_test_pass, f
         make_confusion_matrix(y_test_pass, pred_test, "Confusion Matrix for Test")
     return score_list  # returning the list with train and test scores
 
-
 # Build logistic regression model
 from sklearn.linear_model import LogisticRegression
 lr_mod = LogisticRegression()
