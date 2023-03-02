@@ -36,8 +36,6 @@ plt.xlabel("Observed value")
 #plt.ylabel("KDE")                      #use if kde=True
 plt.ylabel("Observation frequency")     #use if kde=False
 
-
-
 #Visualize data in regard to empirical CDF
 plt.figure(figsize=(9,5))
 ax=sns.distplot(data, kde=True)
