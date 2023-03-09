@@ -72,20 +72,20 @@ def get_metrics_score(model, X_train_df, X_test_df, y_train_pass, y_test_pass, f
     score_list.extend(
         (train_acc, test_acc, train_recall, test_recall, train_precision, test_precision, train_f1, test_f1))
 
-    if flag == True:
-        print("\x1b[0;30;47m \033[1mMODEL PERFORMANCE\x1b[0m")
-        print("\x1b[0;30;47m \033[1mAccuracy   : Train:\x1b[0m", round(train_acc, 3),
-              "\x1b[0;30;47m \033[1mTest:\x1b[0m ", round(test_acc, 3))
-        print("\x1b[0;30;47m \033[1mRecall     : Train:\x1b[0m", round(train_recall, 3),
-              "\x1b[0;30;47m \033[1mTest:\x1b[0m", round(test_recall, 3))
+        if flag == True:
+            print("\x1b[0;30;47m \033[1mMODEL PERFORMANCE\x1b[0m")
+            print("\x1b[0;30;47m \033[1mAccuracy   : Train:\x1b[0m", round(train_acc, 3),
+                "\x1b[0;30;47m \033[1mTest:\x1b[0m ", round(test_acc, 3))
+            print("\x1b[0;30;47m \033[1mRecall     : Train:\x1b[0m", round(train_recall, 3),
+                "\x1b[0;30;47m \033[1mTest:\x1b[0m", round(test_recall, 3))
 
-        print("\x1b[0;30;47m \033[1mPrecision  : Train:\x1b[0m", round(train_precision, 3),
-              "\x1b[0;30;47m \033[1mTest:\x1b[0m ", round(test_precision, 3))
-        print("\x1b[0;30;47m \033[1mF1         : Train:\x1b[0m", round(train_f1, 3),
-              "\x1b[0;30;47m \033[1mTest:\x1b[0m", round(test_f1, 3))
-        make_confusion_matrix(y_train_pass, pred_train, "Confusion Matrix for Train")
-        make_confusion_matrix(y_test_pass, pred_test, "Confusion Matrix for Test")
-    return score_list  # returning the list with train and test scores
+            print("\x1b[0;30;47m \033[1mPrecision  : Train:\x1b[0m", round(train_precision, 3),
+                "\x1b[0;30;47m \033[1mTest:\x1b[0m ", round(test_precision, 3))
+            print("\x1b[0;30;47m \033[1mF1         : Train:\x1b[0m", round(train_f1, 3),
+                "\x1b[0;30;47m \033[1mTest:\x1b[0m", round(test_f1, 3))
+            make_confusion_matrix(y_train_pass, pred_train, "Confusion Matrix for Train")
+            make_confusion_matrix(y_test_pass, pred_test, "Confusion Matrix for Test")
+        return score_list  # returning the list with train and test scores
 
 def dist_box(data):
     '''
@@ -181,13 +181,10 @@ X_train = X_train.values.reshape(-1,1)
 X_test = X_test.values.reshape(-1,1)
 
 #create and fit StandardScaler instance
-scaler = StandardScaler()
-X_train_scaler = scaler.fit(X_train)
-X_test_scaler = scaler.fit(X_test)
-
-#scaling data
-X_train_scaled = X_train_scaler.transform(X_train)
-X_test_scaled = X_test_scaler.transform(X_test)
+from sklearn.preprocessing import MinMaxScaler
+min_max_scaler = preprocessing.MinMaxScaler()
+X_train_scaled = min_max_scaler.fit_transform(X_train)
+X_test_scaled = min_max_scaler.transform(X_test)
 
 #build logistic regression model
 lr_mod = LogisticRegression()
