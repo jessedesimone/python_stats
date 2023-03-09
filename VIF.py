@@ -4,11 +4,6 @@ Module for examining variance inflation factors for predictor features in regres
 Multicolinearity between predictors of a regression model are likely present if the VIF is between 5-10
 VIF should be considered in parallel with the regression results before dropping variable
 
-Change Log
-==========
-0.0.1 (2021-04-08)
-----------
-Initial commit
 '''
 
 # Import packages
