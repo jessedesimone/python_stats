@@ -49,8 +49,9 @@ multitest_methods_names = {'b': 'Bonferroni',
 import numpy as np
 import pandas as pd
 
-list_of_p = []
+
 # Define Runner function
+list_of_p = []
 def number_req():
     num_of_in = int(input('Enter <int> number of uncorrected p-values: '))
     while True:
@@ -79,4 +80,4 @@ newvals.tolist()      #convert array to list
 d = {'Uncorrected':list_of_p, 'FDR':newvals}
 df = pd.DataFrame(d)
 print(df)
-df.to_csv('FDR_out.csv')
+df.to_csv('/Users/jessedesimone/Desktop/FDR_out.csv')
