@@ -4,11 +4,9 @@
 run the number_req() function and manually input all uncorrected p-values
 then run p_adj_bh() function to perform FDR corrected for uncorrected p-values
 '''
-
 # PACKAGES
 import numpy as np
 import pandas as pd
-
 
 # Define Runner function
 list_of_p = []
