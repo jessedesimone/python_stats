@@ -52,8 +52,8 @@ for col in col_names:
     p_unc_list.append(res.pvalue)
 
 #FDR correction for multivariate permutation tests
-import statsmodels
-a=statsmodels.stats.multitest.fdrcorrection(p_unc_list, 
+import statsmodels as sm
+a=sm.stats.multitest.fdrcorrection(p_unc_list, 
                                           alpha=0.05, 
                                           method='indep', 
                                           is_sorted=False)
