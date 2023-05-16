@@ -7,7 +7,7 @@ then run p_adj_bh() function to perform FDR corrected for uncorrected p-values
 
 Option 2
 create csv file with 2 columns
-column 1 is a list of variable names with column name 'variables'
+column 1 is a list of variable names with column name 'variable'
 column 2 is the associated uncorrected p-value for each variable with column name 'p_unc'
 run function
 
