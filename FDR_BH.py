@@ -16,10 +16,10 @@ run function
 import numpy as np
 import pandas as pd
 import statsmodels as sm
+from statsmodels.stats.multitest import fdrcorrection
 
 
 #------------------------- option 1 -------------------------
-
 # Define Runner function
 list_of_p = []
 def number_req():
@@ -51,6 +51,8 @@ d = {'Uncorrected':list_of_p, 'FDR':newvals}
 df = pd.DataFrame(d)
 print(df)
 df.to_csv('/Users/jessedesimone/Desktop/FDR_out.csv')
+
+
 
 #------------------------- option 2 -------------------------
 df = pd.read_csv('/path/to/pvals.csv')
