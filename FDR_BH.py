@@ -59,12 +59,6 @@ df = pd.read_csv('/path/to/pvals.csv')
 var_list=df['variable'].tolist(); var_list
 p_unc_list=df['p_unc'].tolist(); p_unc_list
 
-sm.stats.multitest.fdrcorrection(p_unc_list, 
-                                          alpha=0.05, 
-                                          method='indep', 
-                                          is_sorted=False)
-
-#cannot run below code first for some reason, cannot set sm as variable first
 a=sm.stats.multitest.fdrcorrection(p_unc_list, 
                                           alpha=0.05, 
                                           method='indep', 
