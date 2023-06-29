@@ -50,7 +50,11 @@ for col in col_names:
 
     #FDR correction for multivariate permutation tests
 import statsmodels as sm
-a=sm.stats.multitest.fdrcorrection(p_unc_list, alpha=0.05, method='indep', is_sorted=False)
+from statsmodels.stats.multitest import fdrcorrection
+a=sm.stats.multitest.fdrcorrection(p_unc_list, 
+                                          alpha=0.05, 
+                                          method='indep', 
+                                          is_sorted=False)
 fdr_list=a[1].tolist()
 
 #create a final dataframe
