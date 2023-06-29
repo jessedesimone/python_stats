@@ -36,7 +36,8 @@ for column in df.columns[0:]:
 d = {'Mean':list_of_mean, 'SEM':list_of_sem}
 df = pd.DataFrame(d, index=list_of_cols)
 print(df)
-df.to_csv(path_to_file + 'calculations.csv')
+outfile=os.path.join(path_to_file,'calculations.csv')
+df.to_csv(outfile)
 
 
 
