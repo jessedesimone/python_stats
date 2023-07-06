@@ -4,6 +4,7 @@
 calculate Cohen's d statistic for effect size
 calculate d for each colname in dataframe
 required input is grouped dataframe with individual values
+each column is a different variable to be tested
 create a final dataframe with mean, sd, pooled sd, cohen d for each colname
 user only required to update grp_var and grp names
 '''
