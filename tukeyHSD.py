@@ -4,9 +4,25 @@
 perform pairwise tukey comparisons
 '''
 
+df=pd.read_csv('<path/to/csv>')
+
 #pingouin package
 import pingouin as pg
 pt = pg.pairwise_tukey(data=df,dv='<response_variable>',between='grp_id')
+
+#loop across colums and subscript p-values for each comparison (example assumes 3 groups)
+var_list=df['variable', 'variable']
+col_names = [col for col in var_list]
+tuk_list_1_2=[]
+tuk_list_1_3=[]
+tuk_list_2_3=[]
+for col in col_names:
+    print(col)
+    pt = pg.pairwise_tukey(data=df,dv=col,between='grp_id')
+    print(pt)
+    tuk1=pt["p-tukey"][0]; tuk_list_1_2.append(tuk1) 
+    tuk2=pt["p-tukey"][1]; tuk_list_1_3.append(tuk2)
+    tuk3=pt["p-tukey"][2]; tuk_list_2_3.append(tuk3)
 
 #statsmodels package
 from statsmodels.stats.multicomp import pairwise_tukeyhsd
