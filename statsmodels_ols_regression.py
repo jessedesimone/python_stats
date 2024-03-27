@@ -19,12 +19,12 @@ df = pd.read_csv('regression_input.csv')
 X = df['months_dx_to_v1']
 y = df['psp_prob']
 
-# adding constant term
-X = sm.add_constant(X)
-
 # plot scatter
 #plt.scatter(X,y)
 #plt.show()
+
+# adding constant term
+X = sm.add_constant(X)
 
 # fit model
 model1=sm.OLS(y, X).fit()
