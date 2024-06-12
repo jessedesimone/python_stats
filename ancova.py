@@ -53,11 +53,11 @@ def run_ancova_model():
     '''run model for each variable in col_names'''
     for col in col_names:
         print(col)
-        model = ols('{} ~ C(grp_id) + age + C(sex) + educ + C(apoe)'.format(col), data=df).fit()
+        model = ols('{} ~ C(grp_id) + age + C(sex)'.format(col), data=df).fit()
         print(model.summary())
         model_sum = sm.stats.anova_lm(model, typ=2)
         print(model_sum)
-        p=float(model_sum["PR(>F)"][1])      #get p value for group effect
+        p=float(model_sum["PR(>F)"][0])      #get p value for group effect
         p=("{:.5f}".format(p))
         p_unc_list.append(p)
     d = {'variable':col_list, 'p_unc':p_unc_list}
