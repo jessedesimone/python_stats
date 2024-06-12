@@ -38,8 +38,8 @@ root='/Users/jessedesimone/Desktop/test'
 os.makedirs(root)
 
 #read data
-df_input = pd.read_csv('/Users/jessedesimone/Desktop/test_ancova.csv')        #original dataframe
-df2=df_input.drop(['age', 'sex', 'educ', 'apoe'], axis=1)     #create a copy of dataframe without covariates
+df = pd.read_csv('/Users/jessedesimone/Desktop/test_ancova.csv')        #original dataframe
+df2=df.drop(['age', 'sex', 'educ', 'apoe'], axis=1)     #create a copy of dataframe without covariates
 
 #define ancova function
 def run_ancova_model():
@@ -55,7 +55,7 @@ def run_ancova_model():
         print(col)
         model = ols('{} ~ C(grp_id) + age + C(sex) + educ + C(apoe)'.format(col), data=df).fit()
         print(model.summary())
-        model_sum = sm.stats.anova_lm(model, typ=3)
+        model_sum = sm.stats.anova_lm(model, typ=2)
         print(model_sum)
         p=float(model_sum["PR(>F)"][1])      #get p value for group effect
         p=("{:.5f}".format(p))
