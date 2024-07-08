@@ -84,7 +84,7 @@ def run_fdr_correct():
 #define tukey function
 def run_tukey():
     import pingouin as pg
-    df1 = df_input
+    df1 = df
     df2 = pd.read_csv(root + "/aov_p_fdr.csv")
     var_list=df2['variable'].tolist()
     p_unc_list=df2['p_unc'].tolist()
