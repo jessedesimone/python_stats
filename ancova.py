@@ -57,7 +57,7 @@ def run_ancova_model():
         print(model.summary())
         model_sum = sm.stats.anova_lm(model, typ=2)
         print(model_sum)
-        p=float(model_sum["PR(>F)"][0])      #get p value for group effect
+        p=float(model_sum["PR(>F)"][0])      #get p value for group effect !!!!!CONFIRM THIS IS THE RIGHT INDEX AFTER RUNNING
         p=("{:.5f}".format(p))
         p_unc_list.append(p)
     d = {'variable':col_list, 'p_unc':p_unc_list}
