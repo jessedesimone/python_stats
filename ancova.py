@@ -34,12 +34,15 @@ from statsmodels.formula.api import ols
 from statsmodels.stats.multicomp import pairwise_tukeyhsd
 
 #create output directory
-root='/Users/jessedesimone/Desktop/test'
+root='/Users/jessedesimone/Desktop/ANCOVA_OUTPUT'
 os.makedirs(root)
 
 #read data
 df = pd.read_csv('/Users/jessedesimone/Desktop/test_ancova.csv')        #original dataframe
 df2=df.drop(['age', 'sex', 'educ', 'apoe'], axis=1)     #create a copy of dataframe without covariates
+
+# make copy of input file in output folder
+df.to_csv(os.path.join(root, "ancova_input_raw.csv"), index=False)
 
 #define ancova function
 def run_ancova_model():
