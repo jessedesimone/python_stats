@@ -2,6 +2,7 @@
 import pandas as pd
 from lifelines import CoxPHFitter
 import numpy as np
+import matplotlib.pyplot as plt
 
 # Assuming you have your dataset in a DataFrame called 'data'
 # 'Time' represents the time to event or censoring
@@ -66,3 +67,8 @@ elif cph.summary.loc['Treatment', 'p'] >= 0.05:
 # Get hazard ratios and confidence intervals
 print(cph.summary['coef'])
 print(cph.confidence_intervals_)
+
+# Plot the coefficients of the Cox model
+cph.plot()
+plt.title('Cox Proportional Hazards Model')
+plt.show()
