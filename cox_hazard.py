@@ -68,10 +68,10 @@ elif cph.summary.loc['Treatment', 'p'] >= 0.05:
 print(cph.summary['coef'])
 print(cph.confidence_intervals_)
 
-# # Plot the coefficients of the Cox model
-# cph.plot()
-# plt.title('Cox Proportional Hazards Model')
-# plt.show()
+# Plot the coefficients of the Cox model
+cph.plot()
+plt.title('Cox Proportional Hazards Model')
+plt.show()
 
 # Plot survival curves using Kaplan-Meier estimator for different treatments
 kmf = KaplanMeierFitter()
