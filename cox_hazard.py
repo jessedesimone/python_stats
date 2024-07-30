@@ -1,6 +1,6 @@
 #!/usr/local/bin/python3.9
 import pandas as pd
-from lifelines import CoxPHFitter
+from lifelines import CoxPHFitter, KaplanMeierFitter
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -68,7 +68,23 @@ elif cph.summary.loc['Treatment', 'p'] >= 0.05:
 print(cph.summary['coef'])
 print(cph.confidence_intervals_)
 
-# Plot the coefficients of the Cox model
-cph.plot()
-plt.title('Cox Proportional Hazards Model')
+# # Plot the coefficients of the Cox model
+# cph.plot()
+# plt.title('Cox Proportional Hazards Model')
+# plt.show()
+
+# Plot survival curves using Kaplan-Meier estimator for different treatments
+kmf = KaplanMeierFitter()
+
+# Fit the Kaplan-Meier model for Medication A
+kmf.fit(data_med_a['Time'], event_observed=data_med_a['Event'], label='Medication A')
+ax = kmf.plot_survival_function()
+
+# Fit the Kaplan-Meier model for Medication B
+kmf.fit(data_med_b['Time'], event_observed=data_med_b['Event'], label='Medication B')
+kmf.plot_survival_function(ax=ax)
+
+plt.title('Survival Function by Treatment')
+plt.xlabel('Time')
+plt.ylabel('Survival Probability')
 plt.show()
