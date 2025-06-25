@@ -1,7 +1,11 @@
 import math
 from scipy.stats import norm
 
-def calculate_sample_size(test_type, alpha=0.05, power=0.8, effect_size=None, p1=None, p2=None, paired=False):
+def cohen_h(p1, p2):
+    """Calculate Cohen's h effect size for two proportions."""
+    return 2 * (math.asin(math.sqrt(p1)) - math.asin(math.sqrt(p2)))
+
+def calculate_sample_size(test_type, alpha=0.05, power=0.8, effect_size=None, p1=None, p2=None, paired=False, use_cohen_h=False):
     """
     Calculate sample size for clinical trials.
     
@@ -18,26 +22,28 @@ def calculate_sample_size(test_type, alpha=0.05, power=0.8, effect_size=None, p1
         n (float): Required sample size per group (for two-sample tests) or total sample size (for paired/one-sample tests).
     """
     z_alpha = norm.ppf(1 - alpha / 2)  # Z-value for significance level
-    z_beta = norm.ppf(power)          # Z-value for power
+    z_beta = norm.ppf(power)            # Z-value for power
     
     if test_type == 'means':
         if effect_size is None:
             raise ValueError("For 'means' test, effect_size (Cohen's d) must be provided.")
         
         if paired:
-            # Sample size for paired design (one sample)
             n = ((z_alpha + z_beta) / effect_size) ** 2
         else:
-            # Sample size for two-sample comparison
             n = 2 * ((z_alpha + z_beta) / effect_size) ** 2
     
     elif test_type == 'proportions':
         if p1 is None or p2 is None:
-            raise ValueError("For 'proportions' test, both p1 and p2 must be provided.")
+            raise ValueError("For 'proportions' test, p1 and p2 must be provided.")
         
-        p_avg = (p1 + p2) / 2  # Average proportion
-        effect_size = abs(p1 - p2)
-        n = 2 * ((z_alpha * math.sqrt(2 * p_avg * (1 - p_avg)) + z_beta * math.sqrt(p1 * (1 - p1) + p2 * (1 - p2))) / effect_size) ** 2
+        if use_cohen_h:
+            h = abs(cohen_h(p1, p2))
+            n = 2 * ((z_alpha + z_beta) / h) ** 2
+        else:
+            p_avg = (p1 + p2) / 2
+            effect_size = abs(p1 - p2)
+            n = 2 * ((z_alpha * math.sqrt(2 * p_avg * (1 - p_avg)) + z_beta * math.sqrt(p1 * (1 - p1) + p2 * (1 - p2))) / effect_size) ** 2
     
     else:
         raise ValueError("Invalid test_type. Choose 'means' or 'proportions'.")
@@ -51,9 +57,16 @@ if __name__ == "__main__":
     print(f"Sample size per group for means comparison: {n_means}")
     
     # Two-sample comparison of proportions
-    n_props = calculate_sample_size(test_type='proportions', alpha=0.05, power=0.8, p1=0.6, p2=0.8)
-    print(f"Sample size per group for proportions comparison: {n_props}")
+    # Using raw difference
+    n_raw = calculate_sample_size(test_type='proportions', p1=0.80, p2=0.90, alpha=0.05, use_cohen_h=False)
+    print(f"Sample size per group for proportions (raw difference): {n_raw}")
+    
+    # Using Cohen's h
+    n_cohen = calculate_sample_size(test_type='proportions', p1=0.80, p2=0.90, alpha = 0.05, use_cohen_h=True)
+    print(f"Sample size per group for proportions (Cohen's h): {n_cohen}")
     
     # Paired t-test using Cohen's d
     n_paired = calculate_sample_size(test_type='means', alpha=0.05, power=0.8, effect_size=0.3, paired=True)
     print(f"Total sample size for paired design: {n_paired}")
+    
+    
